@@ -3,18 +3,34 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
+import { RouterModule } from '@angular/router';
+
 import { AppComponent } from './app.component';
+import { ItemsComponent } from './items/items.component';
+
+import { ItemsService } from './items.service';
+
+//define the routes
+
+const ROUTES = [
+  {
+    path: '',
+    redirectTo: 'items',
+    pathMatch: 'full'
+  },
+  {
+    path: 'items',
+    component: ItemsComponent
+  }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
+  declarations: [ AppComponent, ItemsComponent ],
+  imports: [ BrowserModule, FormsModule, HttpModule,
+      RouterModule.forRoot(ROUTES) ],
+  
+  providers: [ItemsService],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
